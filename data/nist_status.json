@@ -1,0 +1,157 @@
+{
+  "last_updated": "2026-09",
+  "reference": "SP 800-131A Rev.2 / IR 8547 (draft) / FIPS 203-205",
+  "algorithms": {
+    "MD5": {
+      "category": "hash",
+      "current_status": "disallowed",
+      "status_2030": "disallowed",
+      "status_2035": "disallowed",
+      "quantum_vulnerable": false,
+      "legacy_use_allowed": false,
+      "nist_reference": "SP 800-131A Rev.2",
+      "pqc_replacement": {
+        "recommendation": "SHA-256 or SHA-3-256",
+        "fips": "FIPS 180-4 / FIPS 202",
+        "hybrid": "Not applicable (hash)",
+        "rationale": "MD5 is broken by collision attacks. Replace unconditionally — not a PQC issue.",
+        "trade_offs": "SHA-256 has negligible cost increase over MD5. No latency concern."
+      }
+    },
+    "SHA-1": {
+      "category": "hash",
+      "current_status": "deprecated",
+      "status_2030": "disallowed",
+      "status_2035": "disallowed",
+      "quantum_vulnerable": false,
+      "legacy_use_allowed": true,
+      "nist_reference": "SP 800-131A Rev.2",
+      "pqc_replacement": {
+        "recommendation": "SHA-256 or SHA-3-256",
+        "fips": "FIPS 180-4 / FIPS 202",
+        "hybrid": "Not applicable (hash)",
+        "rationale": "SHA-1 is deprecated for digital signatures. Legacy verification paths may continue temporarily.",
+        "trade_offs": "SHA-256 produces 32-byte digest (vs 20). Storage impact minimal."
+      }
+    },
+    "SHA-256": {
+      "category": "hash",
+      "current_status": "approved",
+      "status_2030": "approved",
+      "status_2035": "approved",
+      "quantum_vulnerable": false,
+      "legacy_use_allowed": true,
+      "nist_reference": "SP 800-131A Rev.2 / FIPS 180-4",
+      "pqc_replacement": {
+        "recommendation": "No change required",
+        "fips": "FIPS 180-4",
+        "hybrid": "Not applicable",
+        "rationale": "SHA-256 remains secure post-quantum. Grover's algorithm offers only quadratic speedup, absorbed by 256-bit output.",
+        "trade_offs": "None."
+      }
+    },
+    "AES": {
+      "category": "symmetric",
+      "key_size_thresholds": {
+        "128": {"current": "approved", "2030": "deprecated", "2035": "deprecated"},
+        "192": {"current": "approved", "2030": "approved", "2035": "approved"},
+        "256": {"current": "approved", "2030": "approved", "2035": "approved"}
+      },
+      "quantum_vulnerable": false,
+      "legacy_use_allowed": true,
+      "nist_reference": "SP 800-131A Rev.2 / FIPS 197",
+      "pqc_replacement": {
+        "recommendation": "AES-256 for post-quantum security margin",
+        "fips": "FIPS 197",
+        "hybrid": "Not applicable (symmetric)",
+        "rationale": "Grover's algorithm halves effective strength. AES-128 → 64-bit effective; AES-256 → 128-bit effective (safe).",
+        "trade_offs": "AES-256 is ~40% slower than AES-128. On modern hardware with AES-NI, impact is negligible."
+      }
+    },
+    "DES": {
+      "category": "symmetric",
+      "current_status": "disallowed",
+      "status_2030": "disallowed",
+      "status_2035": "disallowed",
+      "quantum_vulnerable": false,
+      "legacy_use_allowed": false,
+      "nist_reference": "SP 800-131A Rev.2",
+      "pqc_replacement": {
+        "recommendation": "AES-256-GCM",
+        "fips": "FIPS 197",
+        "hybrid": "Not applicable",
+        "rationale": "DES has a 56-bit key — broken classically. Replace with AES immediately.",
+        "trade_offs": "AES is faster on modern hardware than DES."
+      }
+    },
+    "RSA": {
+      "category": "asymmetric",
+      "key_size_thresholds": {
+        "1024": {"current": "disallowed", "2030": "disallowed", "2035": "disallowed"},
+        "2048": {"current": "approved", "2030": "deprecated", "2035": "disallowed"},
+        "3072": {"current": "approved", "2030": "deprecated", "2035": "disallowed"},
+        "4096": {"current": "approved", "2030": "deprecated", "2035": "disallowed"}
+      },
+      "quantum_vulnerable": true,
+      "legacy_use_allowed": true,
+      "nist_reference": "SP 800-131A Rev.2 / IR 8547",
+      "pqc_replacement": {
+        "recommendation_kem": "ML-KEM-768",
+        "recommendation_signature": "ML-DSA-65",
+        "fips": "FIPS 203 (ML-KEM) / FIPS 204 (ML-DSA)",
+        "hybrid": "X25519 + ML-KEM-768 (key exchange); ECDSA + ML-DSA-65 (signatures)",
+        "rationale": "RSA is broken by Shor's algorithm on a CRQC. Recommended migration: hybrid classical+PQC during transition (NIST IR 8547 protects hybrid deployment).",
+        "trade_offs": "ML-KEM-768 public keys ~1.2 KB (vs RSA-2048 ~256 bytes). ML-DSA-65 signatures ~3.3 KB (vs RSA-2048 ~256 bytes). Expect larger handshakes and ~2× packet overhead in TLS. CPU cost higher — plan load-benchmarking before deployment."
+      }
+    },
+    "ECDSA": {
+      "category": "signature",
+      "current_status": "approved",
+      "status_2030": "deprecated",
+      "status_2035": "disallowed",
+      "quantum_vulnerable": true,
+      "legacy_use_allowed": true,
+      "nist_reference": "SP 800-131A Rev.2 / IR 8547",
+      "pqc_replacement": {
+        "recommendation": "ML-DSA-65 (Dilithium)",
+        "fips": "FIPS 204",
+        "hybrid": "ECDSA + ML-DSA-65",
+        "rationale": "ECDSA is broken by Shor's algorithm. FIPS 204 provides a drop-in PQC signature replacement.",
+        "trade_offs": "ML-DSA-65 signatures larger (~3.3 KB vs ~70 bytes for ECDSA P-256). Consider bandwidth."
+      }
+    },
+    "ECDH": {
+      "category": "key_exchange",
+      "current_status": "approved",
+      "status_2030": "deprecated",
+      "status_2035": "disallowed",
+      "quantum_vulnerable": true,
+      "legacy_use_allowed": true,
+      "nist_reference": "SP 800-131A Rev.2 / IR 8547",
+      "pqc_replacement": {
+        "recommendation": "ML-KEM-768 (Kyber)",
+        "fips": "FIPS 203",
+        "hybrid": "X25519 + ML-KEM-768",
+        "rationale": "ECDH key exchange is Shor-vulnerable. Hybrid is recommended during transition to preserve backward compatibility.",
+        "trade_offs": "ML-KEM-768 ciphertexts ~1 KB. TLS handshake grows by ~1-2 KB. Modern networks tolerate this easily."
+      }
+    },
+    "ML-KEM": {
+      "category": "kem",
+      "current_status": "approved",
+      "status_2030": "approved",
+      "status_2035": "approved",
+      "quantum_vulnerable": false,
+      "pqc": true,
+      "legacy_use_allowed": true,
+      "nist_reference": "FIPS 203 (2024)",
+      "pqc_replacement": {
+        "recommendation": "Already PQC-compliant",
+        "fips": "FIPS 203",
+        "hybrid": "Consider hybrid X25519+ML-KEM-768 for transition",
+        "rationale": "ML-KEM is the NIST-standardized post-quantum KEM (formerly Kyber). No migration needed.",
+        "trade_offs": "None."
+      }
+    }
+  }
+}

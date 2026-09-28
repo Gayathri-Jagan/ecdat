@@ -1,0 +1,41 @@
+[
+  {
+    "id": "4bf085c8-68cf-46e2-b6ea-6acb76d811aa",
+    "algorithm": "SHA-1",
+    "algorithm_id": "hash-sha1",
+    "category": "hash",
+    "key_size": null,
+    "file": "targets\\clones\\1199dc7e-4c68-4120-b4b9-baf5b976dd00\\src\\flask\\sessions.py",
+    "line": 277,
+    "match": "sha1",
+    "confidence": "medium",
+    "detection_method": "static_regex",
+    "source_type": "source"
+  },
+  {
+    "id": "8314ad48-c04f-4db8-9c19-add7d926ae30",
+    "algorithm": "SHA-1",
+    "algorithm_id": "hash-sha1",
+    "category": "hash",
+    "key_size": null,
+    "file": "targets\\clones\\1199dc7e-4c68-4120-b4b9-baf5b976dd00\\src\\flask\\sessions.py",
+    "line": 278,
+    "match": "SHA-1",
+    "confidence": "medium",
+    "detection_method": "static_regex",
+    "source_type": "source"
+  },
+  {
+    "id": "c47da4ab-241f-4df2-a385-1c942485e7db",
+    "algorithm": "SHA-1",
+    "algorithm_id": "hash-sha1",
+    "category": "hash",
+    "key_size": null,
+    "file": "targets\\clones\\1199dc7e-4c68-4120-b4b9-baf5b976dd00\\src\\flask\\sessions.py",
+    "line": 281,
+    "match": "sha1",
+    "confidence": "medium",
+    "detection_method": "static_regex",
+    "source_type": "source"
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "admin": {
+    "password_hash": "$argon2id$v=19$m=65536,t=3,p=4$9XraKZxieeA8rVRQDc6AaQ$eNjpl3ZP9kcu5fLMi5AddG9UYtAoTlTnm7PmJF1tb70",
+    "role": "admin",
+    "created": "2026-09-22T13:00:50.605252+00:00"
+  }
+}

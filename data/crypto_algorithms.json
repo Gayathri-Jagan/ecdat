@@ -1,0 +1,92 @@
+[
+  {
+    "id": "hash-md5",
+    "name": "MD5",
+    "aliases": ["md5"],
+    "category": "hash",
+    "detection_patterns": [
+      "\\bmd5\\b",
+      "hashlib\\.md5",
+      "MD5\\.Create",
+      "MessageDigest\\.getInstance\\s*\\(\\s*[\"']MD5[\"']\\)"
+    ]
+  },
+  {
+    "id": "hash-sha1",
+    "name": "SHA-1",
+    "aliases": ["sha1", "sha-1"],
+    "category": "hash",
+    "detection_patterns": [
+      "\\bsha-?1\\b",
+      "hashlib\\.sha1",
+      "SHA1\\.Create",
+      "MessageDigest\\.getInstance\\s*\\(\\s*[\"']SHA-?1[\"']\\)"
+    ]
+  },
+  {
+    "id": "hash-sha256",
+    "name": "SHA-256",
+    "aliases": ["sha256", "sha-256"],
+    "category": "hash",
+    "detection_patterns": [
+      "\\bsha-?256\\b",
+      "hashlib\\.sha256",
+      "MessageDigest\\.getInstance\\s*\\(\\s*[\"']SHA-?256[\"']\\)"
+    ]
+  },
+  {
+    "id": "sym-aes",
+    "name": "AES",
+    "aliases": ["aes"],
+    "category": "symmetric",
+    "detection_patterns": [
+      "\\bAES[-_ ]?(128|192|256)\\b",
+      "aes[-_ ]?(128|192|256)",
+      "Cipher\\.getInstance\\s*\\(\\s*[\"']AES"
+    ]
+  },
+  {
+    "id": "sym-des",
+    "name": "DES",
+    "aliases": ["des"],
+    "category": "symmetric",
+    "detection_patterns": [
+      "\\bDES\\b",
+      "Cipher\\.getInstance\\s*\\(\\s*[\"']DES[\"']\\)"
+    ]
+  },
+  {
+    "id": "asym-rsa",
+    "name": "RSA",
+    "aliases": ["rsa"],
+    "category": "asymmetric",
+    "detection_patterns": [
+      "\\bRSA\\b",
+      "RSA\\.generate",
+      "RSA[-_ ]?(1024|2048|3072|4096)",
+      "KeyPairGenerator\\.getInstance\\s*\\(\\s*[\"']RSA[\"']\\)"
+    ]
+  },
+  {
+    "id": "asym-ecdsa",
+    "name": "ECDSA",
+    "aliases": ["ecdsa", "ec"],
+    "category": "signature",
+    "detection_patterns": [
+      "\\bECDSA\\b",
+      "ECDSA\\.generate",
+      "KeyPairGenerator\\.getInstance\\s*\\(\\s*[\"']EC[\"']\\)"
+    ]
+  },
+  {
+    "id": "asym-mlkem",
+    "name": "ML-KEM",
+    "aliases": ["ml-kem", "kyber"],
+    "category": "kem",
+    "detection_patterns": [
+      "\\bML-?KEM\\b",
+      "\\bKyber\\b",
+      "ml_kem"
+    ]
+  }
+]
